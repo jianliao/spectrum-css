@@ -107,6 +107,10 @@ governing permissions and limitations under the License.
   padding: 0 var(--spectrum-global-dimension-size-400) var(--spectrum-global-dimension-size-400) var(--spectrum-global-dimension-size-400);
 }
 
+.spectrum-Site-searchField {
+  width: 100%;
+}
+
 .spectrum-Site-searchResults {
   top: -100%;
   left: -100%;

@@ -16,7 +16,7 @@ function Search(el) {
 
   this.el.innerHTML = `
 <div class="spectrum-Site-search" role="search">
-  <form class="spectrum-Search js-form" role="combobox" aria-expanded="false" aria-owns="search-results-listbox" aria-haspopup="listbox">
+  <form class="spectrum-Search spectrum-Site-searchField js-form" role="combobox" aria-expanded="false" aria-owns="search-results-listbox" aria-haspopup="listbox">
     <input type="search" placeholder="Search" name="search" autocomplete="off" class="spectrum-Textfield spectrum-Search-input js-input" aria-autocomplete="list" aria-owns="search-results-listbox" aria-label="Search">
     <svg class="spectrum-Icon spectrum-UIIcon-Magnifier spectrum-Search-icon" focusable="false" aria-hidden="true">
       <use xlink:href="#spectrum-css-icon-Magnifier" />
@@ -78,7 +78,7 @@ function Search(el) {
   }.bind(this));
 
   document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
       this.input.classList.add('focus-ring');
       this.input.setSelectionRange(0, this.input.value.length);
       setTimeout(this.input.focus.bind(this.input), 100);
