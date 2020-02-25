@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: gh-pages
-      - uses: jianliao/merge-gh-pages-branch@master
+      - uses: adobe/spectrum-css-vr-results@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo Branch Name
