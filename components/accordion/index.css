@@ -45,7 +45,7 @@ governing permissions and limitations under the License.
   position: relative;
 
   display: list-item;
-  margin: 0;
+  margin: 20px;
 
   border-bottom: var(--spectrum-accordion-item-border-size) solid transparent;
 
