@@ -1069,18 +1069,16 @@
     octokit-pagination-methods "^1.1.0"
     once "^1.4.0"
     universal-user-agent "^4.0.0"
-
+"@spectrum-css/spectrum-css-vr-test-assets-essential@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/spectrum-css-vr-test-assets-essential/-/spectrum-css-vr-test-assets-essential-1.0.3.tgz#a475174f59680e2cc63c6d0382ba4a95e1001fbd"
+  integrity sha512-/1tiZ7ZqR7ApZCQyei89I4kTs9h8jBNNsWd1XvnmmaN/ckOAmpV0gCRwrmoeLZeNfKN6Q9mEAF8jyPOgbiRmhg==
 "@octokit/types@^2.0.0", "@octokit/types@^2.0.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.1.1.tgz#77e80d1b663c5f1f829e5377b728fa3c4fe5a97d"
   integrity sha512-89LOYH+d/vsbDX785NOfLxTW88GjNd0lWRz1DVPVsZgg9Yett5O+3MOvwo7iHgvUwbFz0mf/yPIjBkUbs4kxoQ==
   dependencies:
     "@types/node" ">= 8"
-
-"@spectrum-css/spectrum-css-vr-test-asset@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@spectrum-css/spectrum-css-vr-test-asset/-/spectrum-css-vr-test-asset-1.1.0.tgz#42dee58a8664b344a45bd6ef743b835a62da6ce0"
-  integrity sha512-NJqrAEV1/sB7WtZToJrZhq7ZO9Biehst0heEepEG+jO6cRKyfOYCK/3STHL/W6kzc9eHCmfDgMk1hQ6GFbnNpg==
 
 "@spectrum/kulcon@^1.x":
   version "1.1.2"
