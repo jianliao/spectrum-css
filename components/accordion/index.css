@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 
 /* https://git.corp.adobe.com/Spectrum/spectrum-origins/pull/60 */
 :root {
-  --spectrum-accordion-icon-width: 8px;
+  --spectrum-accordion-icon-width: 6px;
   --spectrum-accordion-icon-height: 10px;
 
   /* Subtract the size of the border since it's on the item itself */
@@ -35,7 +35,7 @@ governing permissions and limitations under the License.
 
   position: absolute;
   inset-inline-start: var(--spectrum-accordion-icon-spacing);
-  inset-block-start: calc(var(--spectrum-accordion-item-height-actual) / 2 - var(--spectrum-accordion-icon-height) / 2);
+  inset-block-start: calc(var(--spectrum-accordion-item-height-actual) / 4 - var(--spectrum-accordion-icon-height) / 2);
 
   transition: transform ease var(--spectrum-global-animation-duration-100);
 
@@ -70,7 +70,7 @@ governing permissions and limitations under the License.
   box-sizing: border-box;
   /* left padding takes into account the icon's size as well as the focus state's left border */
   padding-block: var(--spectrum-accordion-item-title-padding-y);
-  padding-inline: calc(calc(var(--spectrum-accordion-item-padding) * 2) + 2px) var(--spectrum-accordion-item-padding);
+  padding-inline: calc(calc(var(--spectrum-accordion-item-padding) * 2) + 4px) var(--spectrum-accordion-item-padding);
   margin: 0;
 
   min-block-size: var(--spectrum-accordion-item-height-actual);
