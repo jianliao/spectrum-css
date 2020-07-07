@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 
 /* https://git.corp.adobe.com/Spectrum/spectrum-origins/pull/60 */
 :root {
-  --spectrum-accordion-icon-width: 6px;
+  --spectrum-accordion-icon-width: 8px;
   --spectrum-accordion-icon-height: 10px;
 
   /* Subtract the size of the border since it's on the item itself */
