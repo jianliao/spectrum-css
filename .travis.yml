@@ -1,10 +1,12 @@
+env:
+  global:
+    secure: h/g/KwPGkl2/eCl1ekzglUxqTkQIjzdZmgwoGpe8wLe5HvuKmjo8ZRtOpuLhfev+C/8btjIFfJ6QjOwP+Q6rafftFQ04CgRPYcDaEEM8bTwN/zZltkXXpaTuZPYQvxGfvjCyn1NpfnBWqBQNGoUXcidsyw+WqrwthcswHsH+uu8qKGO+j+3Zrf5hxgHbJV5Val8zv2EfQZiKVYs7sbnBEyOPV7SWWzuQGNd0+qjwRNfeezuHFmnINtzkFNNDU/1maeG2vpu2GtofcREkApnhFGfqNzE9eZJ8prw596BhaQLdo9LJU0cy79uqL9Gk8Z/+2UbFw7Wu0z+90XBdF91fLUDQOXtVRbWf7MImMfLfLvPBGIsG5fenKP8sgWtdnCyqs1blEm7OFiMOO6EKZJZCSw0t39Jvte0RtUQTtlGWRynKhXhJTmOdUxPHK9wm7QaFfOMlDAHrpecGgHb0T+AC/eObtwITJ3rmzEtdavZ8iiPn0B+xS9o2CPNu36JlOdm8cIyqQQD9pfEtPCbPRa8PJObV4XtyV3F8Snnkr3n2g4rmct5bjtUFrjUs1IjXvxlqL3dJh41HRxX2wvEHQm76SpIkRVjKUcJLLawCU55fGy2kYmd2ifmxv3r1ZmYRln4lHXxG8zI5iOKyf2OpEc/Rnpr/k/CxkaAhWj9Hk9/UrGQ=
 language: node_js
 node_js:
-  - "node"
+  - node
 services:
   - docker
 before_install:
-  # Enforce upgrading to the latest yarn to avoid random version of yarn assigned by travis virtual environment.
   - npm install -g yarn
 install:
   - yarn
