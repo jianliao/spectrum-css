@@ -15,14 +15,30 @@ function SpectrumSwitcher(options) {
 
   this._theme = options.theme || 'light';
   this._scale = options.scale || 'medium';
+  this._direction = options.direction || 'ltr';
+  this._callback = options.callback || null;
 
   document.addEventListener('keydown', function(event) {
     if (event.ctrlKey) {
-      if (SpectrumSwitcher.ThemeKeys[event.key]) {
-        this.theme = SpectrumSwitcher.ThemeKeys[event.key];
+      let property;
+      let value;
+      if (value = SpectrumSwitcher.ThemeKeys[event.key]) {
+        property = 'theme';
       }
-      else if (SpectrumSwitcher.ScaleKeys[event.key]) {
-        this.scale = SpectrumSwitcher.ScaleKeys[event.key];
+      else if (value = SpectrumSwitcher.ScaleKeys[event.key]) {
+        property = 'scale';
+      }
+      else if (value = SpectrumSwitcher.DirectionKeys[event.key]) {
+        property = 'direction';
+      }
+
+      this[property] = value;
+
+      if (this._callback) {
+        this._callback({
+          property: property,
+          value: value
+        });
       }
     }
   }.bind(this));
@@ -40,6 +56,11 @@ SpectrumSwitcher.ColorStops = [
   'darkest'
 ];
 
+SpectrumSwitcher.Direction = [
+  'ltr',
+  'rtl'
+];
+
 SpectrumSwitcher.ThemeKeys = {
   '1': 'lightest',
   '2': 'light',
@@ -52,12 +73,38 @@ SpectrumSwitcher.ScaleKeys = {
   'l': 'large'
 };
 
+SpectrumSwitcher.DirectionKeys = {
+  'r': 'rtl',
+  'n': 'ltr'
+};
+
 Object.defineProperty(SpectrumSwitcher.prototype, 'theme', {
   set: function(theme) {
     SpectrumSwitcher.ColorStops.forEach(function(otherTheme) {
       document.documentElement.classList.remove('spectrum--' + otherTheme);
     });
     document.documentElement.classList.add('spectrum--' + theme);
+
+    let prismLink = document.querySelector('[data-prism]');
+    let prismDarkLink = document.querySelector('[data-prism-dark]');
+    if (theme === 'dark' || theme === 'darkest') {
+      if (prismLink) {
+        if (!prismDarkLink) {
+          prismDarkLink = document.createElement('link');
+          prismDarkLink.setAttribute('rel', 'stylesheet');
+          prismDarkLink.setAttribute('data-prism-dark', '');
+          prismDarkLink.setAttribute('type', 'text/css');
+          prismDarkLink.setAttribute('href', 'css/prism/prism-dark.css');
+        }
+
+        prismLink.parentElement.insertBefore(prismDarkLink, prismLink.nextElementSibling);
+      }
+    }
+    else {
+      if (prismDarkLink) {
+        prismDarkLink.parentElement.removeChild(prismDarkLink);
+      }
+    }
 
     this._theme = theme;
   },
@@ -77,5 +124,16 @@ Object.defineProperty(SpectrumSwitcher.prototype, 'scale', {
   },
   get: function() {
     return this._scale;
+  }
+});
+
+Object.defineProperty(SpectrumSwitcher.prototype, 'direction', {
+  set: function(direction) {
+    document.documentElement.setAttribute('dir', direction);
+
+    this._direction = direction;
+  },
+  get: function() {
+    return this._direction;
   }
 });

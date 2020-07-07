@@ -45,7 +45,11 @@ governing permissions and limitations under the License.
 
     &:active {
       color: var(--spectrum-breadcrumb-text-color-down);
-      border-bottom: 0;
+      border-block-end: 0;
+    }
+
+    &.is-disabled {
+      color: var(--spectrum-label-text-color-disabled);
     }
   }
 
@@ -63,7 +67,7 @@ governing permissions and limitations under the License.
     .spectrum-Breadcrumbs-itemLink {
       &:focus-ring {
         color: var(--spectrum-breadcrumb-text-color-down);
-        border-bottom: 0;
+        border-block-end: 0;
       }
     }
   }

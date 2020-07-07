@@ -11,5 +11,6 @@ governing permissions and limitations under the License.
 */
 
 module.exports = async (page, scenario, vp) => {
+  await require('./hideStuff')(page, scenario);
   await require('./injectSpectrumThemeAndScale')(page, scenario);
 };

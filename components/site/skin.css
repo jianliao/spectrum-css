@@ -34,7 +34,7 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Site-header {
-  border-bottom-color: var(--spectrum-site-header-border-color);
+  border-block-end-color: var(--spectrum-site-header-border-color);
   background-color: var(--spectrum-site-header-background-color);
 }
 
@@ -56,7 +56,7 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-CSSComponent-resource--adobe {
-  color: rgb(255, 2, 1) !important;
+  color: #FA0F00 !important;
   background-color: var(--spectrum-global-color-gray-100) !important;
 }
 
@@ -80,7 +80,7 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-CSSExample-markup {
-  border-top: 1px solid var(--spectrum-cssexample-border-color);
+  border-block-start: 1px solid var(--spectrum-cssexample-border-color);
 
   background: var(--spectrum-cssexample-markup-background-color);
 }
@@ -102,4 +102,9 @@ governing permissions and limitations under the License.
 
 .spectrum-CSSExample-oldAPI {
   color: var(--spectrum-semantic-negative-color-text-small);
+}
+
+.spectrum-CodeBlock {
+  border-color: var(--spectrum-global-color-gray-400);
+  background-color: var(--spectrum-global-color-gray-75);
 }

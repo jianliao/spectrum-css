@@ -52,6 +52,12 @@ window.addEventListener('DOMContentLoaded', function() {
         oldMainContainer.parentNode.insertBefore(newMainContainer, oldMainContainer);
         oldMainContainer.parentNode.removeChild(oldMainContainer);
 
+        // Execute JS
+        var scripts = newMainContainer.querySelectorAll('script');
+        scripts.forEach(function(script) {
+          eval(script.innerText);
+        });
+
         currentHREF = href;
 
         console.log('  ✅ ' + href + ' loaded');
@@ -175,7 +181,21 @@ window.addEventListener('DOMContentLoaded', function() {
   });
 
   // Switcher
-  var switcher = new SpectrumSwitcher();
+  var switcher = new SpectrumSwitcher({
+    callback: function(event) {
+      switch (event.property) {
+        case 'scale':
+          setDropdownValue(scaleDropdown, event.value);
+          break;
+        case 'theme':
+          setDropdownValue(themeDropdown, event.value);
+          break;
+        case 'direction':
+          setDropdownValue(directionDropdown, event.value);
+          break;
+      }
+    }
+  });
 
   // Sidebar
   var sideBar = document.querySelector('#site-sidebar');
@@ -201,18 +221,26 @@ window.addEventListener('DOMContentLoaded', function() {
     else if (event.target.id === 'switcher-theme') {
       switcher.theme = event.detail.value;
     }
+    else if (event.target.id === 'switcher-direction') {
+      switcher.direction = event.detail.value;
+    }
   });
 
   let scaleDropdown = document.querySelector('#switcher-scale');
   let themeDropdown = document.querySelector('#switcher-theme');
+  let directionDropdown = document.querySelector('#switcher-direction');
   window.addEventListener('PageFastLoaded', function updateScaleDropdowns() {
     scaleDropdown = document.querySelector('#switcher-scale');
     themeDropdown = document.querySelector('#switcher-theme');
+    directionDropdown = document.querySelector('#switcher-direction');
     if (scaleDropdown) {
       setDropdownValue(scaleDropdown, switcher.scale);
     }
     if (themeDropdown) {
       setDropdownValue(themeDropdown, switcher.theme);
+    }
+    if (directionDropdown) {
+      setDropdownValue(directionDropdown, switcher.direction);
     }
   });
 
@@ -240,8 +268,8 @@ window.addEventListener('DOMContentLoaded', function() {
     overlay.removeEventListener('click', hideSideBar);
     sideBar.classList.remove('is-open');
     overlay.classList.remove('is-open');
-    if (window.search) {
-      window.search.hideResults();
+    if (window.siteSearch) {
+      window.siteSearch.hideResults();
     }
   }
 
@@ -256,13 +284,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // Search isn't supported on IE 11
   if (typeof Search !== 'undefined') {
-    window.search = new Search(document.querySelector('#site-search'))
+    window.siteSearch = new Search(document.querySelector('#site-search'))
   }
 
   window.addEventListener('SearchFocused', function() {
     showSideBar();
 
     // Immediately hide results, otherwise they show up in the wrong position since we're in the middle of animation
-    search.hideResults();
+    siteSearch.hideResults();
   });
 });

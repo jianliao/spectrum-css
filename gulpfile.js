@@ -4,6 +4,8 @@ const test = require('./tools/test-builder');
 const site = require('./site/gulpfile.js');
 const subrunner = require('./tools/bundle-builder/subrunner');
 const through = require('through2');
+const replace = require('gulp-replace');
+const del = require('del');
 
 Object.assign(exports, builder);
 Object.assign(exports, test);
@@ -14,7 +16,13 @@ const fsp = require('fs').promises;
 const semver = require('semver');
 
 async function readPackage(component) {
-  return JSON.parse(await fsp.readFile(path.join(component, 'package.json')));
+  try {
+    return JSON.parse(await fsp.readFile(path.join(component, 'package.json')));
+  }
+  catch(err) {
+    console.trace();
+    throw new Error(`Error while parsing JSON: for ${component}: ${err}`);
+  }
 }
 
 async function writePackage(component, package) {
@@ -37,7 +45,12 @@ async function checkPeerDependencies() {
         let peerDepVer = package.peerDependencies[dependency];
         if (devDepVer) {
           if (!semver.satisfies(devDepVer, peerDepVer)) {
-            throw new Error(`${component} has out of date peerDependencies ${dependency} (found ${devDepVer}, does not satisfy ${peerDepVer})`);
+            console.error(`${component} has out of date peerDependencies ${dependency} (found ${devDepVer}, does not satisfy ${peerDepVer})`);
+
+            // Set a new peer dependency, stripping the beta version number
+            let newPeerDepVer = '^' + devDepVer.replace(/-\d+$/, '');
+            package.peerDependencies[dependency] = newPeerDepVer
+            console.error(`  Updated ${dependency} to ${newPeerDepVer}`);
           }
         }
         else {
@@ -154,6 +167,33 @@ See the [Spectrum CSS documentation](https://opensource.adobe.com/spectrum-css/)
   }));
 }
 
+/** Site */
+function prepareSite_clean() {
+  return del('dist-site/');
+}
+
+function prepareSite_components() {
+  return gulp.src('dist/components/**/*', {
+    base: 'dist'
+  })
+    .pipe(gulp.dest('dist-site/'));
+}
+
+function prepareSite_docs() {
+  return gulp.src('dist/docs/**/*')
+    .pipe(replace('../components/', 'components/'))
+    .pipe(gulp.dest('dist-site/'));
+}
+
+const prepareSite = gulp.series(
+  prepareSite_clean,
+  gulp.parallel(
+    prepareSite_docs,
+    prepareSite_components
+  )
+);
+
+exports.prepareSite = prepareSite;
 exports.graduatePeerDeps = graduatePeerDeps;
 exports.readmeLint = readmeLint;
 exports.packageLint = packageLint;
